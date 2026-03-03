@@ -107,6 +107,19 @@ main{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:16px 16px 2
 .sum-total{font-family:'DM Serif Display',serif;font-size:24px;color:var(--forest);line-height:1}
 .bags-badge{display:inline-block;background:var(--straw);color:var(--soil);font-size:11px;font-weight:700;padding:2px 8px;border-radius:20px;margin-top:4px}
 
+/* Quick rate calculator */
+.rate-calc-inputs{display:flex;gap:8px;align-items:flex-end;margin-bottom:14px}
+.rate-calc-inputs .field{flex:1}
+.rate-result-row{display:flex;align-items:center;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--dew)}
+.rate-result-row:last-child{border-bottom:none}
+.rate-zone-name{font-size:14px;font-weight:500;color:var(--forest)}
+.rate-zone-sqft{font-size:11px;color:var(--muted)}
+.rate-lbs{font-family:'DM Serif Display',serif;font-size:24px;color:var(--forest);line-height:1;text-align:right}
+.rate-lbs-unit{font-size:11px;color:var(--muted);text-align:right}
+.rate-total-row{display:flex;align-items:center;justify-content:space-between;padding:12px 0 0;margin-top:4px;border-top:2px solid var(--border)}
+.rate-total-label{font-size:13px;font-weight:700;color:var(--forest);text-transform:uppercase;letter-spacing:0.5px}
+.rate-total-lbs{font-family:'DM Serif Display',serif;font-size:28px;color:var(--forest);line-height:1;text-align:right}
+
 /* Log */
 .log-entry{display:flex;gap:12px;padding:12px 0;border-bottom:1px solid var(--border);align-items:flex-start}
 .log-entry:last-child{border-bottom:none}
@@ -208,6 +221,23 @@ main{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:16px 16px 2
 
     <!-- RESULTS -->
     <div class="screen" id="screen-results">
+      <!-- Quick Rate Calculator -->
+      <div class="card">
+        <div class="card-title">⚡ Quick Rate Calculator</div>
+        <div class="rate-calc-inputs">
+          <div class="field" style="flex:2">
+            <label>Fertilizer Name</label>
+            <input type="text" id="qc-name" placeholder="e.g. Milorganite" style="font-family:'DM Sans',sans-serif;font-size:14px">
+          </div>
+          <div class="field" style="flex:1">
+            <label>Rate (lbs / 1k sqft)</label>
+            <input type="number" id="qc-rate" placeholder="0.3" step="0.1" min="0" inputmode="decimal">
+          </div>
+        </div>
+        <div id="qc-results">
+          <div style="text-align:center;padding:10px 0;color:var(--muted);font-size:13px">Enter a rate above to see lbs per zone</div>
+        </div>
+      </div>
       <div id="results-content"></div>
     </div>
 
@@ -323,7 +353,7 @@ document.querySelectorAll('.tab').forEach(tab => {
     document.getElementById('screen-'+name).classList.add('active');
     document.getElementById('scroll').scrollTop = 0;
     document.getElementById('fab').classList.toggle('visible', name==='log');
-    if(name==='results') renderResults();
+    if(name==='results') { renderResults(); renderQuickCalc(); }
     if(name==='log') renderLog();
     persist();
   });
@@ -538,6 +568,50 @@ document.getElementById('btn-save').addEventListener('click', () => {
   toast('Application logged ✓');
 });
 
+// ── Quick Rate Calculator ────────────────────────────────────────────────────
+function renderQuickCalc() {
+  const rate = parseFloat(document.getElementById('qc-rate').value) || 0;
+  const name = document.getElementById('qc-name').value.trim();
+  const wrap = document.getElementById('qc-results');
+  if(!wrap) return;
+
+  if(!rate) {
+    wrap.innerHTML = '<div style="text-align:center;padding:10px 0;color:var(--muted);font-size:13px">Enter a rate above to see lbs per zone</div>';
+    return;
+  }
+
+  const zoneNames = S.zoneNames || ['Front Yard','Back Left','Back Middle','Back Right'];
+  const zones = S.zones;
+  let total = 0;
+  let html = '';
+
+  zones.forEach((area, i) => {
+    if(!area) return;
+    const lbs = rate * area / 1000;
+    total += lbs;
+    html += `<div class="rate-result-row">
+      <div>
+        <div class="rate-zone-name">${zoneNames[i]}</div>
+        <div class="rate-zone-sqft">${area.toLocaleString()} sqft</div>
+      </div>
+      <div>
+        <div class="rate-lbs">${fmt(lbs)}</div>
+        <div class="rate-lbs-unit">lbs</div>
+      </div>
+    </div>`;
+  });
+
+  html += `<div class="rate-total-row">
+    <div class="rate-total-label">Total${name ? ' — ' + name : ''}</div>
+    <div>
+      <div class="rate-total-lbs">${fmt(total)}</div>
+      <div class="rate-lbs-unit" style="text-align:right">lbs total</div>
+    </div>
+  </div>`;
+
+  wrap.innerHTML = html;
+}
+
 // ── Toast ─────────────────────────────────────────────────────────────────────
 function toast(msg) {
   const t = document.getElementById('toast');
@@ -556,6 +630,12 @@ function toast(msg) {
   document.getElementById('bk').value = sl.bk;
   document.querySelectorAll('[data-zone]').forEach(el => el.value = S.zones[+el.dataset.zone] ?? 0);
   renderFertSlots();
+
+  // Quick calc live update — attached after DOM ready, delegated via document
+  // since the inputs are in results screen (rendered on tab switch)
+  document.addEventListener('input', e => {
+    if(e.target.id === 'qc-rate' || e.target.id === 'qc-name') renderQuickCalc();
+  });
 })();
 </script>
 
