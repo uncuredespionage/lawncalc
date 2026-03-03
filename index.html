@@ -15,8 +15,8 @@
 <style>
 :root {
   --forest:#1a2e1a; --pine:#2d4a2d; --moss:#3d6b3d; --fern:#4e8c4e;
-  --sage:#7ab87a; --mist:#b8d4b8; --dew:#e8f2e8; --cream:#f5f0e8;
-  --soil:#8b6914; --clay:#c4922a; --straw:#f0d060; --alert:#c0392b;
+  --sage:#7ab87a; --dew:#e8f2e8; --cream:#f5f0e8;
+  --soil:#8b6914; --straw:#f0d060;
   --white:#ffffff; --text:#1a2e1a; --muted:#5a7a5a;
   --card-bg:#ffffff; --page-bg:#f0ede6; --border:#d4e4d4;
   --r:14px; --r-sm:8px;
@@ -34,30 +34,29 @@ header h1{font-family:'DM Serif Display',serif;font-size:22px;color:var(--cream)
 header p{font-size:11px;color:var(--sage);letter-spacing:0.3px}
 
 nav{background:var(--forest);display:flex;padding:6px 12px calc(6px + var(--safe-bot));gap:4px;flex-shrink:0;border-top:1px solid rgba(255,255,255,0.07)}
-.tab{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;padding:8px 4px;border-radius:var(--r-sm);border:none;background:transparent;color:var(--sage);font-family:'DM Sans',sans-serif;font-size:10px;font-weight:500;letter-spacing:0.2px;cursor:pointer;transition:all .15s;-webkit-user-select:none}
+.tab{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;padding:8px 4px;border-radius:var(--r-sm);border:none;background:transparent;color:var(--sage);font-family:'DM Sans',sans-serif;font-size:10px;font-weight:500;cursor:pointer;transition:all .15s;-webkit-user-select:none}
 .tab-icon{font-size:20px;line-height:1}
 .tab.active{background:var(--moss);color:var(--cream)}
 
 main{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:16px 16px 28px;display:flex;flex-direction:column;gap:14px}
-
 .screen{display:none;flex-direction:column;gap:14px}
 .screen.active{display:flex}
 
 .card{background:var(--card-bg);border-radius:var(--r);padding:18px;border:1px solid var(--border);box-shadow:0 1px 4px rgba(0,0,0,0.06)}
 .card-title{font-family:'DM Serif Display',serif;font-size:15px;color:var(--forest);margin-bottom:14px;display:flex;align-items:center;gap:8px}
 .badge{background:var(--dew);color:var(--moss);font-family:'DM Sans',sans-serif;font-size:10px;font-weight:600;padding:2px 8px;border-radius:20px;letter-spacing:0.5px;text-transform:uppercase}
-
 .slabel{font-size:11px;font-weight:600;letter-spacing:0.8px;text-transform:uppercase;color:var(--muted);margin-bottom:10px}
 
 .field-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:10px}
 .field-row2{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px}
 .field{display:flex;flex-direction:column;gap:4px}
 .field label{font-size:10px;font-weight:600;color:var(--muted);letter-spacing:0.5px;text-transform:uppercase}
-.field input,.field-full input{background:var(--dew);border:1.5px solid var(--border);border-radius:var(--r-sm);padding:10px;font-family:'DM Mono',monospace;font-size:15px;font-weight:500;color:var(--forest);width:100%;outline:none;transition:border-color .15s;-webkit-appearance:none}
-.field input:focus,.field-full input:focus{border-color:var(--fern);background:var(--white)}
+.field input{background:var(--dew);border:1.5px solid var(--border);border-radius:var(--r-sm);padding:10px;font-family:'DM Mono',monospace;font-size:15px;font-weight:500;color:var(--forest);width:100%;outline:none;transition:border-color .15s;-webkit-appearance:none}
+.field input:focus{border-color:var(--fern);background:var(--white)}
 .field-full{display:flex;flex-direction:column;gap:4px;margin-bottom:10px}
 .field-full label{font-size:10px;font-weight:600;color:var(--muted);letter-spacing:0.5px;text-transform:uppercase}
-.field-full input{font-family:'DM Sans',sans-serif;font-size:14px;padding:10px 12px}
+.field-full input{background:var(--dew);border:1.5px solid var(--border);border-radius:var(--r-sm);padding:10px 12px;font-family:'DM Sans',sans-serif;font-size:14px;color:var(--forest);width:100%;outline:none;transition:border-color .15s;-webkit-appearance:none}
+.field-full input:focus{border-color:var(--fern);background:var(--white)}
 
 .zone-row{display:flex;align-items:center;gap:10px;padding:11px 0;border-bottom:1px solid var(--border)}
 .zone-row:last-child{border-bottom:none;padding-bottom:0}
@@ -69,14 +68,14 @@ main{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:16px 16px 2
 .zone-unit{font-size:11px;color:var(--muted);font-weight:500}
 
 .fert-slot{background:var(--dew);border-radius:var(--r-sm);padding:12px;margin-bottom:8px;border:1.5px solid var(--border);transition:border-color .15s}
+.fert-slot:last-child{margin-bottom:0}
 .fert-slot:focus-within{border-color:var(--fern)}
 .fert-num-badge{display:inline-block;font-size:10px;font-weight:700;letter-spacing:0.8px;text-transform:uppercase;color:var(--moss);background:rgba(78,140,78,0.12);padding:2px 8px;border-radius:20px;margin-bottom:10px}
-.fert-name-input{font-family:'DM Sans',sans-serif!important;font-size:14px!important}
-
 .callout{background:var(--dew);border-left:3px solid var(--fern);border-radius:0 var(--r-sm) var(--r-sm) 0;padding:10px 12px;font-size:12px;color:var(--muted);line-height:1.5;margin-bottom:14px}
 
 /* Results */
-.zone-result-title{font-family:'DM Serif Display',serif;font-size:17px;color:var(--forest);margin-bottom:14px;padding-bottom:10px;border-bottom:2px solid var(--dew)}
+.zone-result-title{font-family:'DM Serif Display',serif;font-size:17px;color:var(--forest);margin-bottom:14px;padding-bottom:10px;border-bottom:2px solid var(--dew);display:flex;align-items:baseline;gap:8px}
+.zone-sqft{font-size:12px;color:var(--muted);font-family:'DM Sans',sans-serif;font-weight:400}
 .fert-result{display:flex;align-items:flex-start;gap:12px;padding:12px 0;border-bottom:1px solid var(--dew)}
 .fert-result:last-of-type{border-bottom:none}
 .fri{flex:1;min-width:0}
@@ -90,12 +89,16 @@ main{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:16px 16px 2
 .lbs-col{text-align:right;flex-shrink:0}
 .lbs-big{font-family:'DM Serif Display',serif;font-size:28px;color:var(--forest);line-height:1}
 .lbs-unit{font-size:11px;color:var(--muted)}
-
 .status-row{display:flex;gap:8px;margin-top:14px;padding-top:14px;border-top:1px solid var(--border)}
 .spill{flex:1;text-align:center;padding:8px 4px;border-radius:var(--r-sm);font-size:12px;font-weight:600}
 .spill.met{background:#e8f5e9;color:#2e7d32}
 .spill.short{background:#fff8e1;color:#e65100}
 
+/* Back yard section grouping */
+.back-section-label{font-size:11px;font-weight:700;letter-spacing:0.6px;text-transform:uppercase;color:var(--muted);padding:10px 0 6px;border-top:1px dashed var(--border);margin-top:4px}
+.back-section-label:first-child{border-top:none;padding-top:0;margin-top:0}
+
+/* Grand summary */
 .sum-row{display:flex;align-items:center;justify-content:space-between;padding:13px 0;border-bottom:1px solid var(--dew)}
 .sum-row:last-child{border-bottom:none}
 .sum-name{font-size:14px;font-weight:600;color:var(--forest)}
@@ -118,15 +121,15 @@ main{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:16px 16px 2
 .log-lbs{font-family:'DM Serif Display',serif;font-size:22px;color:var(--forest);line-height:1}
 .log-lbs-unit{font-size:10px;color:var(--muted);font-family:'DM Sans',sans-serif}
 .del-btn{background:none;border:none;font-size:16px;color:var(--muted);cursor:pointer;padding:2px;opacity:0.5;transition:opacity .15s}
-.del-btn:active{opacity:1;color:var(--alert)}
+.del-btn:active{opacity:1;color:#c0392b}
 
 .empty-state{text-align:center;padding:36px 20px;color:var(--muted)}
 .empty-icon{font-size:44px;margin-bottom:12px;opacity:0.4}
 .empty-title{font-family:'DM Serif Display',serif;font-size:18px;color:var(--forest);margin-bottom:6px}
 .empty-text{font-size:13px;line-height:1.5}
 
-.fab{position:fixed;bottom:calc(80px + var(--safe-bot));right:20px;width:52px;height:52px;background:var(--fern);color:white;border:none;border-radius:50%;font-size:28px;display:none;place-items:center;box-shadow:0 4px 16px rgba(78,140,78,0.4);cursor:pointer;z-index:100;transition:transform .12s,box-shadow .12s}
-.fab:active{transform:scale(0.92);box-shadow:0 2px 8px rgba(78,140,78,0.3)}
+.fab{position:fixed;bottom:calc(80px + var(--safe-bot));right:20px;width:52px;height:52px;background:var(--fern);color:white;border:none;border-radius:50%;font-size:28px;display:none;place-items:center;box-shadow:0 4px 16px rgba(78,140,78,0.4);cursor:pointer;z-index:100;transition:transform .12s}
+.fab:active{transform:scale(0.92)}
 .fab.visible{display:grid}
 
 .overlay{position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:200;display:none;align-items:flex-end;backdrop-filter:blur(3px)}
@@ -136,7 +139,6 @@ main{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:16px 16px 2
 .modal-handle{width:36px;height:4px;background:var(--border);border-radius:2px;margin:0 auto 20px}
 .modal-title{font-family:'DM Serif Display',serif;font-size:20px;color:var(--forest);margin-bottom:18px}
 .modal-actions{display:flex;gap:10px;margin-top:18px}
-
 .btn{flex:1;padding:14px;border-radius:var(--r-sm);border:none;font-family:'DM Sans',sans-serif;font-size:15px;font-weight:600;cursor:pointer;transition:transform .1s,opacity .1s}
 .btn:active{transform:scale(0.97);opacity:0.85}
 .btn-primary{background:var(--fern);color:white}
@@ -247,7 +249,7 @@ main{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:16px 16px 2
 <div class="toast" id="toast"></div>
 
 <script>
-// ── State ────────────────────────────────────────────────────────────────────
+// ── State ─────────────────────────────────────────────────────────────────────
 const DEF_FERTS = [
   {name:'20-27-5',n:20,p:27,k:5,bag:50},
   {name:'',n:0,p:0,k:0,bag:50},
@@ -257,14 +259,12 @@ const DEF_FERTS = [
 ];
 
 function loadState() {
-  try {
-    const s = localStorage.getItem('lc2');
-    if (s) return JSON.parse(s);
-  } catch(e) {}
+  try { const s=localStorage.getItem('lc3'); if(s) return JSON.parse(s); } catch(e){}
   return {
     soil:{fn:0.8,fp:1.5,fk:0.5,bn:1.0,bp:1.9,bk:1.0},
     ferts:JSON.parse(JSON.stringify(DEF_FERTS)),
     zones:[2000,1900,1600,1600],
+    zoneNames:['Front Yard','Back Left','Back Middle','Back Right'],
     log:[
       {id:1,date:'2023-06-04',fert:'Milorganite (6-4-0)',zone:'Front & Back',rate:0.8,area:7100,notes:'First app of season'},
       {id:2,date:'2023-07-23',fert:'PGF Complete (16-4-8)',zone:'Front Yard',rate:0.7,area:2000,notes:''},
@@ -276,17 +276,12 @@ function loadState() {
 const S = loadState();
 
 function persist() {
-  // sync inputs → state
-  ['fn','fp','fk','bn','bp','bk'].forEach(id => {
-    S.soil[id] = +document.getElementById(id).value || 0;
-  });
-  document.querySelectorAll('[data-zone]').forEach(el => {
-    S.zones[+el.dataset.zone] = +el.value || 0;
-  });
-  try { localStorage.setItem('lc2', JSON.stringify(S)); } catch(e) {}
+  ['fn','fp','fk','bn','bp','bk'].forEach(id => S.soil[id] = +document.getElementById(id).value||0);
+  document.querySelectorAll('[data-zone]').forEach(el => S.zones[+el.dataset.zone] = +el.value||0);
+  try { localStorage.setItem('lc3', JSON.stringify(S)); } catch(e){}
 }
 
-// ── Fert slots ───────────────────────────────────────────────────────────────
+// ── Fert slots ────────────────────────────────────────────────────────────────
 function renderFertSlots() {
   const wrap = document.getElementById('fert-slots');
   wrap.innerHTML = '';
@@ -297,7 +292,7 @@ function renderFertSlots() {
       <div class="fert-num-badge">Fertilizer ${i+1}</div>
       <div class="field-full" style="margin-bottom:8px">
         <label>Bag Name</label>
-        <input class="fert-name-input" type="text" data-fi="${i}" data-k="name" value="${f.name}" placeholder="${i===0?'e.g. 20-27-5':'Leave blank if unused'}">
+        <input type="text" data-fi="${i}" data-k="name" value="${f.name}" placeholder="${i===0?'e.g. 20-27-5':'Leave blank if unused'}" style="font-family:'DM Sans',sans-serif;font-size:14px">
       </div>
       <div class="field-row" style="margin-bottom:8px">
         <div class="field"><label>N %</label><input type="number" data-fi="${i}" data-k="n" value="${f.n}" min="0" max="100" step="1" inputmode="decimal"></div>
@@ -311,14 +306,14 @@ function renderFertSlots() {
     wrap.appendChild(d);
   });
   wrap.addEventListener('input', e => {
-    const el = e.target; const fi = el.dataset.fi; const k = el.dataset.k;
-    if (fi===undefined) return;
+    const el=e.target, fi=el.dataset.fi, k=el.dataset.k;
+    if(fi===undefined) return;
     S.ferts[+fi][k] = k==='name' ? el.value : (+el.value||0);
     persist();
   });
 }
 
-// ── Navigation ───────────────────────────────────────────────────────────────
+// ── Navigation ────────────────────────────────────────────────────────────────
 document.querySelectorAll('.tab').forEach(tab => {
   tab.addEventListener('click', () => {
     document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
@@ -328,49 +323,105 @@ document.querySelectorAll('.tab').forEach(tab => {
     document.getElementById('screen-'+name).classList.add('active');
     document.getElementById('scroll').scrollTop = 0;
     document.getElementById('fab').classList.toggle('visible', name==='log');
-    if (name==='results') renderResults();
-    if (name==='log') renderLog();
+    if(name==='results') renderResults();
+    if(name==='log') renderLog();
     persist();
   });
 });
-
 document.querySelectorAll('#screen-inputs input').forEach(el => el.addEventListener('change', persist));
 
-// ── Calc ─────────────────────────────────────────────────────────────────────
+// ── Calc engine ───────────────────────────────────────────────────────────────
+// N-first priority: if fert has N%, drive off N. Else P%, else K%.
+// Each fert covers the REMAINING gap after prior ferts.
 function calcZone(area, nT, pT, kT) {
-  let cN=0,cP=0,cK=0;
+  let cN=0, cP=0, cK=0;
   const rows = S.ferts.map(f => {
     const empty = !f.name.trim() && f.n===0 && f.p===0 && f.k===0;
-    if (empty) return {f,lbs:0,sN:0,sP:0,sK:0,empty:true};
+    if(empty) return {f, lbs:0, sN:0, sP:0, sK:0, empty:true};
     const np=f.n/100, pp=f.p/100, kp=f.k/100;
     let lbs=0;
-    if (np>0)      lbs = Math.max(0,nT-cN)/np*(area/1000);
-    else if (pp>0) lbs = Math.max(0,pT-cP)/pp*(area/1000);
-    else if (kp>0) lbs = Math.max(0,kT-cK)/kp*(area/1000);
+    if(np>0)      lbs = Math.max(0, nT-cN) / np * (area/1000);
+    else if(pp>0) lbs = Math.max(0, pT-cP) / pp * (area/1000);
+    else if(kp>0) lbs = Math.max(0, kT-cK) / kp * (area/1000);
     const sN=lbs*np/(area/1000), sP=lbs*pp/(area/1000), sK=lbs*kp/(area/1000);
     cN+=sN; cP+=sP; cK+=sK;
-    return {f,lbs,sN,sP,sK,empty:false};
+    return {f, lbs, sN, sP, sK, empty:false};
   });
-  return {rows,cN,cP,cK};
+  return {rows, cN, cP, cK};
 }
 
-function fmt(n){ return n===0?'0': n%1===0?n.toString():n.toFixed(2).replace(/\.?0+$/,''); }
+function fmt(n) { return n===0?'0': n%1===0?n.toString():n.toFixed(2).replace(/\.?0+$/,''); }
 
-// ── Results ───────────────────────────────────────────────────────────────────
+// ── Results rendering ─────────────────────────────────────────────────────────
+function zoneCard(label, area, nT, pT, kT, res) {
+  const active = res.rows.filter(r => !r.empty && r.lbs > 0.001);
+  let h = `<div class="card">
+    <div class="zone-result-title">${label} <span class="zone-sqft">${area.toLocaleString()} sqft</span></div>`;
+  if(!active.length) {
+    h += `<div style="text-align:center;padding:14px 0;color:var(--muted);font-size:13px">Add a fertilizer in Inputs to see results</div>`;
+  } else {
+    active.forEach(r => {
+      h += `<div class="fert-result">
+        <div class="fri">
+          <div class="fri-name">${r.f.name||'(unnamed)'}</div>
+          <div class="npills">
+            <span class="npill n">N&nbsp;${fmt(r.sN)}</span>
+            <span class="npill p">P&nbsp;${fmt(r.sP)}</span>
+            <span class="npill k">K&nbsp;${fmt(r.sK)}</span>
+          </div>
+          <div class="supplied-label">lbs / 1k sqft supplied</div>
+        </div>
+        <div class="lbs-col">
+          <div class="lbs-big">${fmt(r.lbs)}</div>
+          <div class="lbs-unit">lbs needed</div>
+        </div>
+      </div>`;
+    });
+  }
+  const nM=res.cN>=nT-0.001, pM=res.cP>=pT-0.001, kM=res.cK>=kT-0.001;
+  h += `<div class="status-row">
+    <div class="spill ${nM?'met':'short'}">${nM?'✅':'⚠️'} N ${nM?'Met':'Short'}</div>
+    <div class="spill ${pM?'met':'short'}">${pM?'✅':'⚠️'} P ${pM?'Met':'Short'}</div>
+    <div class="spill ${kM?'met':'short'}">${kM?'✅':'⚠️'} K ${kM?'Met':'Short'}</div>
+  </div></div>`;
+  return h;
+}
+
 function renderResults() {
-  const {soil:sl,zones:z} = S;
-  const fA=z[0], bA=z[1]+z[2]+z[3];
-  const front=calcZone(fA,sl.fn,sl.fp,sl.fk);
-  const back =calcZone(bA,sl.bn,sl.bp,sl.bk);
+  const sl = S.soil;
+  const z  = S.zones;
+  const names = S.zoneNames || ['Front Yard','Back Left','Back Middle','Back Right'];
 
-  function zoneCard(label,area,nT,pT,kT,res) {
-    const active=res.rows.filter(r=>!r.empty&&r.lbs>0.001);
-    let h=`<div class="card"><div class="zone-result-title">${label} <span style="font-size:13px;color:var(--muted);font-family:'DM Sans',sans-serif;font-weight:400">${area.toLocaleString()} sqft</span></div>`;
-    if(!active.length){
-      h+=`<div style="text-align:center;padding:16px 0;color:var(--muted);font-size:13px">Add a fertilizer in Inputs to see results</div>`;
+  // Zone 0 = Front Yard
+  // Zones 1,2,3 = individual back sections, each with the BACK YARD soil targets
+  const zones = [
+    { label: names[0], area: z[0], nT: sl.fn, pT: sl.fp, kT: sl.fk },
+    { label: names[1], area: z[1], nT: sl.bn, pT: sl.bp, kT: sl.bk },
+    { label: names[2], area: z[2], nT: sl.bn, pT: sl.bp, kT: sl.bk },
+    { label: names[3], area: z[3], nT: sl.bn, pT: sl.bp, kT: sl.bk },
+  ];
+
+  const results = zones.map(zn => calcZone(zn.area, zn.nT, zn.pT, zn.kT));
+
+  let html = '';
+
+  // Front yard card
+  html += zoneCard(zones[0].label, zones[0].area, zones[0].nT, zones[0].pT, zones[0].kT, results[0]);
+
+  // Back yard — one card, three sections inside
+  const backActive = results.slice(1).some(r => r.rows.some(row => !row.empty && row.lbs > 0.001));
+  html += `<div class="card">
+    <div class="zone-result-title">Back Yard <span class="zone-sqft">${(z[1]+z[2]+z[3]).toLocaleString()} sqft total</span></div>`;
+
+  for(let i=1; i<=3; i++) {
+    const zn = zones[i], res = results[i];
+    const active = res.rows.filter(r => !r.empty && r.lbs > 0.001);
+    html += `<div class="back-section-label">${zn.label} — ${zn.area.toLocaleString()} sqft</div>`;
+    if(!active.length) {
+      html += `<div style="padding:8px 0 4px;color:var(--muted);font-size:13px">Add a fertilizer in Inputs to see results</div>`;
     } else {
-      active.forEach(r=>{
-        h+=`<div class="fert-result">
+      active.forEach(r => {
+        html += `<div class="fert-result">
           <div class="fri">
             <div class="fri-name">${r.f.name||'(unnamed)'}</div>
             <div class="npills">
@@ -386,63 +437,60 @@ function renderResults() {
           </div>
         </div>`;
       });
+      const nM=res.cN>=zn.nT-0.001, pM=res.cP>=zn.pT-0.001, kM=res.cK>=zn.kT-0.001;
+      html += `<div class="status-row" style="margin-bottom:10px">
+        <div class="spill ${nM?'met':'short'}">${nM?'✅':'⚠️'} N ${nM?'Met':'Short'}</div>
+        <div class="spill ${pM?'met':'short'}">${pM?'✅':'⚠️'} P ${pM?'Met':'Short'}</div>
+        <div class="spill ${kM?'met':'short'}">${kM?'✅':'⚠️'} K ${kM?'Met':'Short'}</div>
+      </div>`;
     }
-    const nM=res.cN>=nT-0.001, pM=res.cP>=pT-0.001, kM=res.cK>=kT-0.001;
-    h+=`<div class="status-row">
-      <div class="spill ${nM?'met':'short'}">${nM?'✅':'⚠️'} N ${nM?'Met':'Short'}</div>
-      <div class="spill ${pM?'met':'short'}">${pM?'✅':'⚠️'} P ${pM?'Met':'Short'}</div>
-      <div class="spill ${kM?'met':'short'}">${kM?'✅':'⚠️'} K ${kM?'Met':'Short'}</div>
-    </div></div>`;
-    return h;
   }
+  html += `</div>`;
 
-  let html = zoneCard('Front Yard',fA,sl.fn,sl.fp,sl.fk,front)
-           + zoneCard('Back Yard',bA,sl.bn,sl.bp,sl.bk,back);
-
-  html+=`<div class="card"><div class="card-title">🛒 What to Buy</div>`;
-  let any=false;
-  S.ferts.forEach((f,i)=>{
-    const fr=front.rows[i], br=back.rows[i];
-    const tot=(fr?.lbs||0)+(br?.lbs||0);
-    if(tot<0.01 && !f.name.trim()) return;
-    any=true;
-    const bags=f.bag>0?Math.ceil(tot/f.bag):'—';
-    html+=`<div class="sum-row">
+  // Grand summary — total per fertilizer across ALL zones
+  html += `<div class="card"><div class="card-title">🛒 What to Buy <span class="badge">All Zones</span></div>`;
+  let any = false;
+  S.ferts.forEach((f,fi) => {
+    const totalLbs = results.reduce((sum, res) => sum + (res.rows[fi]?.lbs || 0), 0);
+    if(totalLbs < 0.01 && !f.name.trim()) return;
+    any = true;
+    const bags = f.bag > 0 ? Math.ceil(totalLbs / f.bag) : '—';
+    html += `<div class="sum-row">
       <div>
         <div class="sum-name">${f.name||'(unnamed)'}</div>
         <div class="sum-sub">${f.n}-${f.p}-${f.k} &nbsp;·&nbsp; ${f.bag}lb bag</div>
       </div>
       <div class="sum-right">
-        <div class="sum-total">${fmt(tot)} lbs</div>
+        <div class="sum-total">${fmt(totalLbs)} lbs</div>
         <div><span class="bags-badge">${bags} bag${bags!==1?'s':''}</span></div>
       </div>
     </div>`;
   });
-  if(!any) html+=`<div style="text-align:center;padding:16px 0;color:var(--muted);font-size:13px">No fertilizers entered yet</div>`;
-  html+=`</div>`;
+  if(!any) html += `<div style="text-align:center;padding:16px 0;color:var(--muted);font-size:13px">No fertilizers entered yet</div>`;
+  html += `</div>`;
 
   document.getElementById('results-content').innerHTML = html;
 }
 
-// ── Log ───────────────────────────────────────────────────────────────────────
+// ── Log rendering ──────────────────────────────────────────────────────────────
 function renderLog() {
   const wrap = document.getElementById('log-content');
-  if(!S.log.length){
-    wrap.innerHTML=`<div class="empty-state">
+  if(!S.log.length) {
+    wrap.innerHTML = `<div class="empty-state">
       <div class="empty-icon">📋</div>
       <div class="empty-title">No applications yet</div>
       <div class="empty-text">Tap the + button to log your first fertilizer application.</div>
     </div>`;
     return;
   }
-  const sorted=[...S.log].sort((a,b)=>b.date.localeCompare(a.date));
-  let html=`<div class="card">`;
-  sorted.forEach(e=>{
-    const d=new Date(e.date+'T12:00:00');
-    const mo=d.toLocaleString('en-US',{month:'short'}).toUpperCase();
-    const dy=d.getDate();
-    const lbs=(e.rate*e.area/1000).toFixed(2);
-    html+=`<div class="log-entry">
+  const sorted = [...S.log].sort((a,b) => b.date.localeCompare(a.date));
+  let html = `<div class="card">`;
+  sorted.forEach(e => {
+    const d = new Date(e.date+'T12:00:00');
+    const mo = d.toLocaleString('en-US',{month:'short'}).toUpperCase();
+    const dy = d.getDate();
+    const lbs = (e.rate * e.area / 1000).toFixed(2);
+    html += `<div class="log-entry">
       <div class="log-date"><div class="log-month">${mo}</div><div class="log-day">${dy}</div></div>
       <div class="log-info">
         <div class="log-fname">${e.fert}</div>
@@ -455,58 +503,58 @@ function renderLog() {
       </div>
     </div>`;
   });
-  html+=`</div>`;
-  wrap.innerHTML=html;
-  wrap.querySelectorAll('.del-btn').forEach(btn=>{
-    btn.addEventListener('click',()=>{
+  html += `</div>`;
+  wrap.innerHTML = html;
+  wrap.querySelectorAll('.del-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
       if(!confirm('Delete this entry?')) return;
-      S.log=S.log.filter(e=>e.id!==+btn.dataset.id);
+      S.log = S.log.filter(e => e.id !== +btn.dataset.id);
       persist(); renderLog(); toast('Entry deleted');
     });
   });
 }
 
 // ── Modal ─────────────────────────────────────────────────────────────────────
-document.getElementById('fab').addEventListener('click',()=>{
-  document.getElementById('l-date').value=new Date().toISOString().split('T')[0];
-  ['l-fert','l-zone','l-rate','l-area','l-notes'].forEach(id=>document.getElementById(id).value='');
+document.getElementById('fab').addEventListener('click', () => {
+  document.getElementById('l-date').value = new Date().toISOString().split('T')[0];
+  ['l-fert','l-zone','l-rate','l-area','l-notes'].forEach(id => document.getElementById(id).value='');
   document.getElementById('overlay').classList.add('open');
 });
-document.getElementById('btn-cancel').addEventListener('click',()=>document.getElementById('overlay').classList.remove('open'));
-document.getElementById('overlay').addEventListener('click',e=>{
-  if(e.target===document.getElementById('overlay')) document.getElementById('overlay').classList.remove('open');
+document.getElementById('btn-cancel').addEventListener('click', () => document.getElementById('overlay').classList.remove('open'));
+document.getElementById('overlay').addEventListener('click', e => {
+  if(e.target === document.getElementById('overlay')) document.getElementById('overlay').classList.remove('open');
 });
-document.getElementById('btn-save').addEventListener('click',()=>{
-  const fert=document.getElementById('l-fert').value.trim();
-  const zone=document.getElementById('l-zone').value.trim();
-  const date=document.getElementById('l-date').value;
-  const rate=+document.getElementById('l-rate').value;
-  const area=+document.getElementById('l-area').value;
-  const notes=document.getElementById('l-notes').value.trim();
-  if(!fert||!zone||!date||!rate||!area){toast('Fill in all required fields');return;}
-  S.log.push({id:Date.now(),date,fert,zone,rate,area,notes});
+document.getElementById('btn-save').addEventListener('click', () => {
+  const fert  = document.getElementById('l-fert').value.trim();
+  const zone  = document.getElementById('l-zone').value.trim();
+  const date  = document.getElementById('l-date').value;
+  const rate  = +document.getElementById('l-rate').value;
+  const area  = +document.getElementById('l-area').value;
+  const notes = document.getElementById('l-notes').value.trim();
+  if(!fert||!zone||!date||!rate||!area){ toast('Fill in all required fields'); return; }
+  S.log.push({id:Date.now(), date, fert, zone, rate, area, notes});
   persist(); renderLog();
   document.getElementById('overlay').classList.remove('open');
   toast('Application logged ✓');
 });
 
 // ── Toast ─────────────────────────────────────────────────────────────────────
-function toast(msg){
-  const t=document.getElementById('toast');
-  t.textContent=msg; t.classList.add('show');
-  setTimeout(()=>t.classList.remove('show'),2200);
+function toast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg; t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2200);
 }
 
 // ── Init ──────────────────────────────────────────────────────────────────────
-(function init(){
-  const sl=S.soil;
-  document.getElementById('fn').value=sl.fn;
-  document.getElementById('fp').value=sl.fp;
-  document.getElementById('fk').value=sl.fk;
-  document.getElementById('bn').value=sl.bn;
-  document.getElementById('bp').value=sl.bp;
-  document.getElementById('bk').value=sl.bk;
-  document.querySelectorAll('[data-zone]').forEach(el=>el.value=S.zones[+el.dataset.zone]??0);
+(function init() {
+  const sl = S.soil;
+  document.getElementById('fn').value = sl.fn;
+  document.getElementById('fp').value = sl.fp;
+  document.getElementById('fk').value = sl.fk;
+  document.getElementById('bn').value = sl.bn;
+  document.getElementById('bp').value = sl.bp;
+  document.getElementById('bk').value = sl.bk;
+  document.querySelectorAll('[data-zone]').forEach(el => el.value = S.zones[+el.dataset.zone] ?? 0);
   renderFertSlots();
 })();
 </script>
